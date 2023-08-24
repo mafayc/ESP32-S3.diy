@@ -27,8 +27,8 @@ static const char *TAG = "example";
 #define EXAMPLE_LCD_BK_LIGHT_ON_LEVEL  1
 #define EXAMPLE_LCD_BK_LIGHT_OFF_LEVEL !EXAMPLE_LCD_BK_LIGHT_ON_LEVEL
 #define  SCLK           18
-#define  MOSI           19
-#define  MISO           21
+#define  MOSI           19//在主机这边是输出，在从机那边是输入
+#define  MISO           21// 在主机这边是输入，在从机那边是输出
 #define  LCD_DC         5
 #define  LCD_RST        3
 #define  LCD_CS         4
