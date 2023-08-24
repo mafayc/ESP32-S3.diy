@@ -55,19 +55,20 @@ void OLED_DisplayTurn(u8 i)
 //-------------------------写-------------------------//
 void OLED_WR_Byte(u8 dat,u8 cmd)
 {	
-	u8 i;			  
-	if(cmd)	  OLED_DC_Set();
+	u8 i;			        //循环变量
+
+	if(cmd)	  OLED_DC_Set();//数据命令线判断
 	else	  OLED_DC_Clr();	
 	
 
-	OLED_CS_Clr();
-	for(i=0;i<8;i++)
+	OLED_CS_Clr();			//SPI片选
+	for(i=0;i<8;i++)		//SPI输出dat数据
 	{			  
-		OLED_SCL_Clr();
-		if(dat&0x80)		{		 OLED_SDA_Set();		}
+		OLED_SCL_Clr();		//时钟线高
+		if(dat&0x80)		{		 OLED_SDA_Set();		}//输出对应最高位数据
 		else				{		 OLED_SDA_Clr();		}
-
-	  OLED_SCL_Set();		dat<<=1;   
+		OLED_SCL_Set();		//时钟线低		
+		dat<<=1;			//dat左移1位，共0-7位，
 	}		
 	
 	OLED_CS_Set();
