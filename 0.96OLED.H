@@ -10,7 +10,7 @@
 //[5]0 1 2 3 ... 127	
 //[6]0 1 2 3 ... 127	
 //[7]0 1 2 3 ... 127 			   
-void delay_ms(unsigned int ms){ unsigned int a;	while(ms)	{a=1800;		while(a--);		ms--;	}	return;}//-----延迟时间的函数-----//
+void delay_ms(unsigned int ms){ unsigned int a;	while(ms)	{a=1800;while(a--);ms--;}	return;}//-----延迟时间的函数-----//
 
 
 
@@ -52,7 +52,7 @@ void OLED_DisplayTurn(u8 i)
 
 
 
-
+//-------------------------写-------------------------//
 void OLED_WR_Byte(u8 dat,u8 cmd)
 {	
 	u8 i;			  
