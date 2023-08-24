@@ -16,7 +16,6 @@
 #include "oledfont.h"
 #include "esp_lcd_ili9341.h"
 
-
 static const char *TAG = "example";
 // Using SPI2 in the example
 #define LCD_HOST  SPI2_HOST
