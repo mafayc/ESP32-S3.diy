@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+
+#define PIN GPIO_NUM_46
+
+
+
+void app_main(void)
+{
+	esp_rom_gpio_pad_select_gpio(PIN);
+    //gpio_init();
+    /* Set the GPIO as a push/pull output */
+    gpio_set_direction(PIN, GPIO_MODE_OUTPUT);
+     gpio_pullup_en(PIN);
+gpio_pullup_dis(PIN);
+     gpio_pulldown_en(PIN);
+gpio_pulldown_dis(PIN);
+
+    while(1)
+    {
+        /* Blink off (output low) */
+        printf("off LED\n");
+        gpio_set_level(PIN, 0);
+        vTaskDelay(500);
+        /* Blink on (output high) */
+        printf("on  LED\n");
+        gpio_set_level(PIN, 1);
+        vTaskDelay(500);
+    }
+}
