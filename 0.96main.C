@@ -14,11 +14,11 @@
 #include "oled.h"
 #include "oledbmp.h"
 #include "oledfont.h"
-#include "esp_lcd_ili9341.h"
+
 
 static const char *TAG = "example";
 // Using SPI2 in the example
-#define LCD_HOST  SPI2_HOST
+#define HOST  SPI2_HOST
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////// Please update the following configuration according to your LCD spec //////////////////////////////
@@ -138,7 +138,7 @@ void app_main(void)
         .quadhd_io_num = -1,
         .max_transfer_sz = EXAMPLE_LCD_H_RES * 80 * sizeof(uint16_t),
     };
-    ESP_ERROR_CHECK(spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO));
+    ESP_ERROR_CHECK(spi_bus_initialize(HOST, &buscfg, SPI_DMA_CH_AUTO));
 
     ESP_LOGI(TAG, "Install panel IO");
     esp_lcd_panel_io_handle_t io_handle = NULL;
@@ -154,17 +154,12 @@ void app_main(void)
         .user_ctx = &disp_drv,
     };
     // Attach the LCD to the SPI bus
-    ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)LCD_HOST, &io_config, &io_handle));
+    ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)HOST, &io_config, &io_handle));
 
     esp_lcd_panel_handle_t panel_handle = NULL;
-    esp_lcd_panel_dev_config_t panel_config = {
-        .reset_gpio_num =  LCD_RST,
-        .rgb_endian = LCD_RGB_ENDIAN_BGR,
-        .bits_per_pixel = 16,
-    };
+
 
     ESP_LOGI(TAG, "Install ILI9341 panel driver");
-    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9341(io_handle, &panel_config, &panel_handle));
 
 
     ESP_ERROR_CHECK(esp_lcd_panel_reset(panel_handle));
